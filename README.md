@@ -22,7 +22,7 @@ Modern DNA sequencing works by sequencing millions of short pieces of the DNA ch
 
 Recently, it has become possible to sequence RNA and DNA from single cells. This is a huge advance for research in diseases such as cancer and Parkinson's where the individual cells are very different. One of the keys to this is the use of molecular barcodes. One of the two ends of the DNA pieces is marked with a special tag or barcode so that we can group pieces from the same cell together. The other end of the piece contains the genetic sequences that we are interested in. 
 
-bwa is older software and does yet support barcodes. A first step would be to move the barcode sequence and make it part of the header. Then we can proceed with the rest of the alignment and have the information about the source of the fragment stored and carried along in the processing.
+bwa is older software and does not yet natively support barcodes. A first step would be to join the information from the two files and make a third file where the barcode sequence is part of the header. Then we can proceed with the rest of the alignment pipeline and have the information about the source of the fragment stored and carried along in the processing.
 
 The rest of the README is from the original bwa package.
 
