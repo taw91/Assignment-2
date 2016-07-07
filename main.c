@@ -26,7 +26,11 @@ int main_shm(int argc, char *argv[]);
 
 int main_pemerge(int argc, char *argv[]);
 int main_maxk(int argc, char *argv[]);
-	
+
+//added function declaration here
+int main_barcode(int argc, char *argv[]);
+
+//updated usage	by adding a fprintf for barcode
 static int usage()
 {
 	fprintf(stderr, "\n");
@@ -49,6 +53,7 @@ static int usage()
 	fprintf(stderr, "         pac2bwtgen    alternative algorithm for generating BWT\n");
 	fprintf(stderr, "         bwtupdate     update .bwt to the new format\n");
 	fprintf(stderr, "         bwt2sa        generate SA from BWT and Occ\n");
+	fprintf(stderr, "         barcode       adds barcode\n");
 	fprintf(stderr, "\n");
 	fprintf(stderr,
 "Note: To use BWA, you need to first index the genome with `bwa index'.\n"
@@ -68,6 +73,8 @@ int main(int argc, char *argv[])
 	ksprintf(&pg, "@PG\tID:bwa\tPN:bwa\tVN:%s\tCL:%s", PACKAGE_VERSION, argv[0]);
 	for (i = 1; i < argc; ++i) ksprintf(&pg, " %s", argv[i]);
 	bwa_pg = pg.s;
+	
+	//add entry for barcode
 	if (argc < 2) return usage();
 	if (strcmp(argv[1], "fa2pac") == 0) ret = bwa_fa2pac(argc-1, argv+1);
 	else if (strcmp(argv[1], "pac2bwt") == 0) ret = bwa_pac2bwt(argc-1, argv+1);
@@ -86,6 +93,7 @@ int main(int argc, char *argv[])
 	else if (strcmp(argv[1], "shm") == 0) ret = main_shm(argc-1, argv+1);
 	else if (strcmp(argv[1], "pemerge") == 0) ret = main_pemerge(argc-1, argv+1);
 	else if (strcmp(argv[1], "maxk") == 0) ret = main_maxk(argc-1, argv+1);
+	else if (strcmp(argv[1], "barcode") == 0) ret = main_barcode(argc-1, argv+1);
 	else {
 		fprintf(stderr, "[main] unrecognized command '%s'\n", argv[1]);
 		return 1;

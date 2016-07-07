@@ -1,15 +1,17 @@
 CC=			gcc
 #CC=			clang --analyze
-CFLAGS=		-g -Wall -Wno-unused-function -O2
+#added -ggdb rule for debugging
+CFLAGS=		-g -ggdb -Wall -Wno-unused-function -O2
 WRAP_MALLOC=-DUSE_MALLOC_WRAPPERS
 AR=			ar
 DFLAGS=		-DHAVE_PTHREAD $(WRAP_MALLOC)
+#added barcode.o to the OBJs
 LOBJS=		utils.o kthread.o kstring.o ksw.o bwt.o bntseq.o bwa.o bwamem.o bwamem_pair.o bwamem_extra.o malloc_wrap.o \
-			QSufSort.o bwt_gen.o rope.o rle.o is.o bwtindex.o
+			QSufSort.o bwt_gen.o rope.o rle.o is.o bwtindex.o barcode.o
 AOBJS=		bwashm.o bwase.o bwaseqio.o bwtgap.o bwtaln.o bamlite.o \
 			bwape.o kopen.o pemerge.o maxk.o \
 			bwtsw2_core.o bwtsw2_main.o bwtsw2_aux.o bwt_lite.o \
-			bwtsw2_chain.o fastmap.o bwtsw2_pair.o
+			bwtsw2_chain.o fastmap.o bwtsw2_pair.o barcode.o
 PROG=		bwa
 INCLUDES=	
 LIBS=		-lm -lz -lpthread
@@ -43,8 +45,10 @@ depend:
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
+#added barcode rule
 QSufSort.o: QSufSort.h
 bamlite.o: bamlite.h malloc_wrap.h
+barcode.o:
 bntseq.o: bntseq.h utils.h kseq.h malloc_wrap.h khash.h
 bwa.o: bntseq.h bwa.h bwt.h ksw.h utils.h kstring.h malloc_wrap.h kvec.h
 bwa.o: kseq.h
