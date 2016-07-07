@@ -1,5 +1,31 @@
-[![Build Status](https://travis-ci.org/lh3/bwa.svg?branch=dev)](https://travis-ci.org/lh3/bwa)
-[![Build Status](https://drone.io/github.com/lh3/bwa/status.png)](https://drone.io/github.com/lh3/bwa/latest)
+#Assignment 2
+
+##TLDR:
+
+fastq files are text files with lines in organized in groups of 4. The first line of a group is the header, the second the sequence, the third for comments and the fourth stores the accuracy of the sequencing. You will be appending the first 16 letters of the sequences in the first fastq file to the headers in the second fastq file with a : as a separator and printing the result out to stdout or to a new file. This is done by modifying the barcode.c file - the Makefile and main.c have already been modified for you. Three files are given to you test_R1.fastq test_R2.fastq and correct_output. The program will run as part of bwa thusly:
+
+`bwa barcode test_R1.fastq test_R2.fastq > output.fastq`
+
+It must also support writing to a file as well using the -o flag i.e.
+
+`bwa barcode -o output.fastq test_R1.fastq test_R2.fastq` 
+
+To check that the answer is correct use diff i.e.
+
+`diff output.fastq correct_output`
+
+
+
+##Background
+
+Modern DNA sequencing works by sequencing millions of short pieces of the DNA chain. These have to be assembled into together like a jigsaw puzzle to get the entire sequence. However, we have a reference sequence for human DNA and we can use that to help us put together the pieces. This is what bwa does. It is actually quite a difficult computational problem.
+
+Recently, it has become possible to sequence RNA and DNA from single cells. This is a huge advance for research in diseases such as cancer and Parkinson's where the individual cells are very different. One of the keys to this is the use of molecular barcodes. One of the two ends of the DNA pieces is marked with a special tag or barcode so that we can group pieces from the same cell together. The other end of the piece contains the genetic sequences that we are interested in. 
+
+bwa is older software and does yet support barcodes. A first step would be to move the barcode sequence and make it part of the header. Then we can proceed with the rest of the alignment and have the information about the source of the fragment stored and carried along in the processing.
+
+The rest of the README is from the original bwa package.
+
 ##Getting started
 
 	git clone https://github.com/lh3/bwa.git
