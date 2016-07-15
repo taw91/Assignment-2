@@ -1,4 +1,4 @@
-l#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #define BARCODE_LENGTH 16 //default barcode length
