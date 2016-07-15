@@ -1,4 +1,4 @@
-#include <stdlib.h>
+l#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #define BARCODE_LENGTH 16 //default barcode length
@@ -42,6 +42,6 @@ int main_barcode(int argc, char *argv[]){
 
 	fclose(inputfp1);
 	fclose(inputfp2);
-	if(outputfp !=stdout)fclose(stdout);
+	if(outputfp !=stdout)fclose(outputfp);
 	return 0;
 }
